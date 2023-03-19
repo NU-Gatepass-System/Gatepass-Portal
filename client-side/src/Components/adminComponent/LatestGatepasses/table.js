@@ -12,24 +12,22 @@ const List = () => {
   const [LatestGP, setLatestGP] = useState([]);
 
   useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/today_gatepass")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/today_gatepass")
       .then((response) => {
         return response.json();
       })
       .then((text) => {
         setLatestGP(text);
       });
-      console.log(LatestGP)
-    })
+    console.log(LatestGP);
+  });
 
-    function changeDate(val) {
-      let date = new Date();
-      date = `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}`;
-      console.log('date',date)
-      return date
-    }
-    
-    
+  function changeDate(val) {
+    let date = new Date();
+    date = `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}`;
+    console.log("date", date);
+    return date;
+  }
 
   return (
     <TableContainer component={Paper} className="table">
@@ -43,28 +41,26 @@ const List = () => {
             <TableCell className="tableCell">Arrival Date</TableCell>
             <TableCell className="tableCell">Arrival Time</TableCell>
             <TableCell className="tableCell">Destination</TableCell>
-            <TableCell className="tableCell">Status</TableCell>  
+            <TableCell className="tableCell">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {LatestGP.map((row) => (
-            <TableRow key={row.request_id}>
-              <TableCell className="tableCell">{row.user_id}</TableCell>
-              <TableCell className="tableCell">{row.gatepass_type}</TableCell>
-              <TableCell className="tableCell">{changeDate(Date(row.from_date))}</TableCell>
-              <TableCell className="tableCell">{row.from_time}</TableCell>
-              <TableCell className="tableCell">{row.to_date}</TableCell>
-              <TableCell className="tableCell">{row.to_time}</TableCell>
-              <TableCell className="tableCell">{row.destination}</TableCell>
-              <TableCell className="tableCell">
-                <span className={`status ${row.status}`}>{row.status}</span>
-              </TableCell>
+          {LatestGP.map((gp) => (
+            <TableRow key={gp.request_id}>
+              <TableCell>{gp.user_id}</TableCell>
+              <TableCell>{gp.gatepass_type}</TableCell>
+              <TableCell>{gp.from_date.substring(0, 10)}</TableCell>
+              <TableCell>{gp.from_time.substring(11, 16)}</TableCell>
+              <TableCell>{gp.to_date.substring(0, 10)}</TableCell>
+              <TableCell>{gp.to_time.substring(11, 16)}</TableCell>
+              <TableCell>{gp.destination}</TableCell>
+              <TableCell>{gp.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
-};
+          }
 
 export default List;

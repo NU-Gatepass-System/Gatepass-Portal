@@ -38,6 +38,8 @@ import {
     getDefaulterDateWise,
     getEOD,
     getWarden,
+    getAllGroups,
+    getAllSubGroups,
 
     createBlacklistedStudent,
 
@@ -77,12 +79,12 @@ router.get('/admin/all_status', getAllStatus);
 router.put('/admin/user/:id', updateUser);
 /////////////Param Config/////////////////////
 router.get('/admin/parameter_config', getParameterConfig);
-router.put('/admin/parameter_config/week_limit/:id', updateWeekLimit);
-router.put('/admin/parameter_config/out_time/:id', updateOutTime);
-router.put('/admin/parameter_config/in_time/:id', updateInTime);
-router.put('/admin/parameter_config/arrival_restrict_ub/:id', updateArrivalRestrictUB);
-router.put('/admin/parameter_config/arrival_restrict_lb/:id', updateArrivalRestrictLB);
-router.put('/admin/parameter_config/flexible_entry/:id', updateFlexibleEntry);
+router.put('/admin/parameter_config/week_limit/:param_id', updateWeekLimit);
+router.put('/admin/parameter_config/out_time/:param_id', updateOutTime);
+router.put('/admin/parameter_config/in_time/:param_id', updateInTime);
+router.put('/admin/parameter_config/arrival_restrict_ub/:param_id', updateArrivalRestrictUB);
+router.put('/admin/parameter_config/arrival_restrict_lb/:param_id', updateArrivalRestrictLB);
+router.put('/admin/parameter_config/flexible_entry/:param_id', updateFlexibleEntry);
 
 
 
@@ -105,6 +107,6 @@ router.get('/admin/warden_report/:id/:sd/:ed', getWarden);
 
 
 router.post('/admin/blacklist_student', createBlacklistedStudent);
-
-
+router.get("/admin/get_all_groups", getAllGroups);
+router.get("/admin/get_all_sub_groups", getAllSubGroups);
 export default router;
